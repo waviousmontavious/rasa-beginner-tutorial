@@ -1,0 +1,109 @@
+version: '2.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- greet
+- affirm
+- inform
+- ask_eat_healthy
+- goodbye
+- deny
+- mood_great
+- mood_unhappy
+- bot_challenge
+- ask_lower_stress
+- ask_exercise
+- out_of_scope
+entities:
+- exercise
+- sleep
+- stress
+slots:
+  confirm_exercise:
+    type: bool
+    influence_conversation: true
+  exercise:
+    type: text
+    influence_conversation: true
+  sleep:
+    type: text
+    influence_conversation: true
+  stress:
+    type: categorical
+    influence_conversation: true
+    values:
+    - low
+    - medium
+    - high
+responses:
+  utter_greet:
+  - text: Hey! It's time for your wellness check. Would you like to answer a few questions?
+  utter_cheer_up:
+  - text: 'Here is something to cheer you up:'
+    image: https://i.imgur.com/nGF1K8f.jpg
+  utter_did_that_help:
+  - text: Did that help you?
+  utter_happy:
+  - text: Great, carry on!
+  utter_goodbye:
+  - text: Bye
+  utter_iamabot:
+  - text: I am a bot, powered by Rasa.
+  utter_stress_info:
+  - text: Hey you need to chill. Try some deep breathing or meditation
+  utter_exercise_info:
+  - text: Most healthy adults should aim to get about 150 minutes of moderate exercise per week.
+  utter_diet_info:
+  - text: A healthy diet includes fruits and vegetables, whole grains, lean protein, and plant-based fats.
+  utter_ask_confirm_exercise:
+  - text: Did you exercise yesterday?
+  utter_ask_sleep:
+  - text: How much sleep did you get last night?
+  utter_ask_exercise:
+  - text: What kind of exercise did you do?
+  utter_ask_diet:
+  - text: Did you stick to a healthy diet yesterday?
+  utter_ask_stress:
+  - text: Is your stress level low medium or high?
+  utter_ask_goal:
+  - text: What do you want to accomplish today?
+  utter_slots_values:
+  - text: |
+      Here's your daily wellness log:
+       - Exercised?: {confirm_exercise}
+       - Type of exercise: {exercise}
+       - Sleep: {sleep}
+       - Stress level: {stress}
+  utter_no_worries:
+  - text: No problem :)
+  utter_ask_continue:
+  - text: Sorry, I don't quite understand. Do you want to continue?
+actions:
+- utter_diet_info
+- utter_goodbye
+- utter_greet
+- utter_slots_values
+forms:
+  health_form:
+    confirm_exercise:
+    - type: from_intent
+      value: true
+      intent: affirm
+      not_intent: deny
+    - type: from_intent
+      value: false
+      intent: deny
+      not_intent: affirm
+    exercise:
+    - type: from_entity
+      entity: exercise
+      intent: inform
+    sleep:
+    - type: from_entity
+      entity: sleep
+      intent: inform
+    stress:
+    - type: from_entity
+      entity: stress
+      intent: inform
