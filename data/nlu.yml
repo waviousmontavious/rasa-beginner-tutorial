@@ -55,6 +55,7 @@ nlu:
     - could have been better
     - not great
     - nope
+    - actually, nevermind
 - intent: inform
   examples: |
     - a full [8 hours](sleep) of sleep
@@ -68,7 +69,7 @@ nlu:
     - Yeah, I [walked](exercise) my dog yesterday
     - I [ran](exercise) a mile
     - I had [7 hours](sleep) of sleep
-    - [low](stress)
+    - I played an hour of [tennis](exercise)
 - intent: out_of_scope
   examples: |
     - that's not what I want to do

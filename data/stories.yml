@@ -96,3 +96,28 @@ stories:
   - active_loop: null
   - action: utter_slots_values
   - action: utter_goodbye
+
+- story: deny to give sleep info
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: affirm
+  - action: health_form
+  - active_loop: health_form
+  - slot_was_set:
+    - requested_slot: confirm_exercise
+  - slot_was_set:
+    - confirm_exercise: true
+  - slot_was_set:
+    - requested_slot: exercise
+  - slot_was_set:
+    - exercise: tennis
+  - slot_was_set:
+    - exercise: tennis
+  - slot_was_set:
+    - requested_slot: sleep
+  - intent: deny
+  - action: action_deactivate_loop
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
