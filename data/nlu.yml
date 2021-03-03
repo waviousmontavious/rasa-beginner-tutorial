@@ -134,3 +134,11 @@ nlu:
   examples: |
     - What is a good amount of excercise for someone in their twenties
     - How many times per week do I need to excercise
+- intent: request_health_form
+  examples: |
+    - I want to check in on my health
+    - Can I see the health form
+    - I want to answer some questions about my health
+    - Let me tell you about my health
+    - Health form
+    - Health form please

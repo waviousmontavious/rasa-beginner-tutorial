@@ -2,6 +2,20 @@ version: "2.0"
 
 rules:
 
+- rule: Activate Health Form
+  steps:
+  - intent: request_health_form
+  - action: health_form
+  - active_loop: health_form
+
+- rule: Submit Health Form
+  condition:
+  - active_loop: health_form
+  steps:
+  - action: health_form
+  - active_loop: null
+  - action: utter_slots_values
+
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye

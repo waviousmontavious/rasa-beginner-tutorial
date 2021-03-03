@@ -15,17 +15,12 @@ intents:
 - ask_lower_stress
 - ask_exercise
 - out_of_scope
+- request_health_form
 entities:
 - exercise
 - sleep
 - stress
 slots:
-  confirm_exercise:
-    type: bool
-    influence_conversation: true
-  exercise:
-    type: text
-    influence_conversation: true
   sleep:
     type: text
     influence_conversation: true
@@ -33,9 +28,16 @@ slots:
     type: categorical
     influence_conversation: true
     values:
-    - low
-    - medium
-    - high
+      - low
+      - medium
+      - high
+  confirm_exercise:
+    type: bool
+    influence_conversation: true
+  exercise:
+    type: text
+    influence_conversation: true
+
 responses:
   utter_greet:
   - text: Hey! It's time for your wellness check. Would you like to answer a few questions?
@@ -84,25 +86,17 @@ actions:
 - utter_goodbye
 - utter_greet
 - utter_slots_values
+- validate_health_form
 forms:
   health_form:
-    confirm_exercise:
-    - type: from_intent
-      value: true
-      intent: affirm
-      not_intent: deny
-    - type: from_intent
-      value: false
-      intent: deny
-      not_intent: affirm
     exercise:
-    - type: from_entity
-      entity: exercise
-      intent: inform
+      - type: from_entity
+        entity: exercise
+        intent: inform
     sleep:
-    - type: from_entity
-      entity: sleep
-      intent: inform
+      - type: from_entity
+        entity: sleep
+        intent: inform
     stress:
     - type: from_entity
       entity: stress

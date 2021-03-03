@@ -2,43 +2,16 @@ version: "2.0"
 
 stories:
 
-- story: happy path
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
-
-- story: sad path 1
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
-
-- story: sad path 2
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
-
-- story: survey happy path
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: affirm
-  - action: health_form
-  - active_loop: health_form
-  - active_loop: null
-  - action: utter_slots_values
-  - action: utter_goodbye
+# - story: survey happy path
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: affirm
+#   - action: health_form
+#   - active_loop: health_form
+#   - active_loop: null
+#   - action: utter_slots_values
+#   - action: utter_goodbye
 
 - story: ask diet questions
   steps:
@@ -62,62 +35,62 @@ stories:
   - intent: ask_eat_healthy
   - action: utter_diet_info
 
-- story: survey interactive happy path
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: affirm
-  - action: health_form
-  - active_loop: health_form
-  - slot_was_set:
-    - requested_slot: confirm_exercise
-  - slot_was_set:
-    - confirm_exercise: true
-  - slot_was_set:
-    - requested_slot: exercise
-  - slot_was_set:
-    - exercise: ran
-  - slot_was_set:
-    - exercise: ran
-  - slot_was_set:
-    - requested_slot: sleep
-  - slot_was_set:
-    - sleep: 7 hours
-  - slot_was_set:
-    - sleep: 7 hours
-  - slot_was_set:
-    - requested_slot: stress
-  - slot_was_set:
-    - stress: low
-  - slot_was_set:
-    - stress: low
-  - slot_was_set:
-    - requested_slot: null
-  - active_loop: null
-  - action: utter_slots_values
-  - action: utter_goodbye
+# - story: survey interactive happy path
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: affirm
+#   - action: health_form
+#   - active_loop: health_form
+#   - slot_was_set:
+#     - requested_slot: confirm_exercise
+#   - slot_was_set:
+#     - confirm_exercise: true
+#   - slot_was_set:
+#     - requested_slot: exercise
+#   - slot_was_set:
+#     - exercise: ran
+#   - slot_was_set:
+#     - exercise: ran
+#   - slot_was_set:
+#     - requested_slot: sleep
+#   - slot_was_set:
+#     - sleep: 7 hours
+#   - slot_was_set:
+#     - sleep: 7 hours
+#   - slot_was_set:
+#     - requested_slot: stress
+#   - slot_was_set:
+#     - stress: low
+#   - slot_was_set:
+#     - stress: low
+#   - slot_was_set:
+#     - requested_slot: null
+#   - active_loop: null
+#   - action: utter_slots_values
+#   - action: utter_goodbye
 
-- story: deny to give sleep info
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: affirm
-  - action: health_form
-  - active_loop: health_form
-  - slot_was_set:
-    - requested_slot: confirm_exercise
-  - slot_was_set:
-    - confirm_exercise: true
-  - slot_was_set:
-    - requested_slot: exercise
-  - slot_was_set:
-    - exercise: tennis
-  - slot_was_set:
-    - exercise: tennis
-  - slot_was_set:
-    - requested_slot: sleep
-  - intent: deny
-  - action: action_deactivate_loop
-  - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
+# - story: deny to give sleep info
+#   steps:
+#   - intent: greet
+#   - action: utter_greet
+#   - intent: affirm
+#   - action: health_form
+#   - active_loop: health_form
+#   - slot_was_set:
+#     - requested_slot: confirm_exercise
+#   - slot_was_set:
+#     - confirm_exercise: true
+#   - slot_was_set:
+#     - requested_slot: exercise
+#   - slot_was_set:
+#     - exercise: tennis
+#   - slot_was_set:
+#     - exercise: tennis
+#   - slot_was_set:
+#     - requested_slot: sleep
+#   - intent: deny
+#   - action: action_deactivate_loop
+#   - active_loop: null
+#   - slot_was_set:
+#     - requested_slot: null

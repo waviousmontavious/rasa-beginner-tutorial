@@ -1,48 +1,42 @@
-# This files contains your custom actions which can be used to run
-# custom Python code.
-#
-# See this guide on how to implement these action:
-# https://rasa.com/docs/rasa/custom-actions
-
-
-# This is a simple example for a custom action which utters "Hello World!"
-
 from typing import Any, Text, Dict, List, Union
 
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
-from rasa_sdk.forms import FormAction
+from rasa_sdk.forms import FormValidationAction
 
-class HealthForm(FormAction):
 
-    def name(self):
-        return "health_form"
+class HealthForm(FormValidationAction):
 
-    @staticmethod
-    def required_slots(tracker):
+    def name(self) -> Text:
+        return "validate_health_form"
 
-        if tracker.get_slot("confirm_exercise") == True:
-            return ["confirm_exercise", "exercise", "sleep", "stess"]
-        else:
-            return ["confirm_exercise", "sleep", "stess"]
-
-    def submit(
+    async def required_slots(
         self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: Dict[Text, Any],
-    ) -> List[Dict]:
-        return []
+        slots_mapped_in_domain: List[Text],
+        dispatcher: "CollectingDispatcher",
+        tracker: "Tracker",
+        domain: "DomainDict",
+    ) -> List[Text]:
+        custom_slots = ["confirm_exercise"]
+        if all(s in slots_mapped_in_domain for s in custom_slots):
+            return slots_mapped_in_domain
 
-    def slot_mapping(self) -> Dict[Text, Union[Dict, List[Dict]]]:
-        return {
-            "confirm_exercise": [
-                self.from_intent(intent="affirm", value=True),
-                self.from_intent(intent="deny", value=False),
-                self.from_intent(intent="inform", value=True)
-            ],
-            "sleep": [
-                self.from_entity(entity="sleep"),
-                self.from_intent(intent="deny", value="None")
-            ]
-        }
+        required_slots = custom_slots + slots_mapped_in_domain
+        return required_slots
+
+    async def extract_confirm_exercise(
+            self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict
+    ) -> Dict[Text, Any]:
+        # todo - figure out why this keeps running even when the slot is filled
+        print("Confirm Exercise Extractor is running")
+        print(tracker.slots)
+        if tracker.get_intent_of_latest_message() == 'request_health_form':
+            return {"confirm_exercise": None}
+        last_bot_event = next(e for e in reversed(tracker.events) if e['event'] == 'bot')
+        if last_bot_event['metadata']['template_name'] != 'utter_ask_confirm_exercise':
+            return {"confirm_exercise": None}
+
+        if tracker.get_intent_of_latest_message() == 'affirm':
+            return {"confirm_exercise": True}
+        else:
+            return {"confirm_exercise": False, "exercise": None}

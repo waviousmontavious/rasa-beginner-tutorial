@@ -40,4 +40,3 @@ policies:
     constrain_similarities: true
     model_confidence: cosine
   - name: RulePolicy
-  - name: FormPolicy
