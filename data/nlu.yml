@@ -70,6 +70,9 @@ nlu:
     - I [ran](exercise) a mile
     - I had [7 hours](sleep) of sleep
     - I played an hour of [tennis](exercise)
+    - about [8 hours](sleep)
+    - [5 hours](sleep) of sleep
+    - [high](stress)
 - intent: out_of_scope
   examples: |
     - that's not what I want to do
@@ -142,3 +145,4 @@ nlu:
     - Let me tell you about my health
     - Health form
     - Health form please
+    - health form

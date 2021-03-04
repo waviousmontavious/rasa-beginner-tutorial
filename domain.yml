@@ -5,6 +5,7 @@ session_config:
 intents:
 - inform
 - deny
+- request_health_form
 - affirm
 - greet
 - ask_eat_healthy
@@ -15,7 +16,6 @@ intents:
 - ask_lower_stress
 - ask_exercise
 - out_of_scope
-- request_health_form
 entities:
 - exercise
 - sleep
@@ -28,16 +28,15 @@ slots:
     type: categorical
     influence_conversation: true
     values:
-      - low
-      - medium
-      - high
+    - low
+    - medium
+    - high
   confirm_exercise:
     type: bool
     influence_conversation: true
   exercise:
     type: text
     influence_conversation: true
-
 responses:
   utter_greet:
   - text: Hey! It's time for your wellness check. Would you like to answer a few questions?
@@ -90,13 +89,13 @@ actions:
 forms:
   health_form:
     exercise:
-      - type: from_entity
-        entity: exercise
-        intent: inform
+    - type: from_entity
+      entity: exercise
+      intent: inform
     sleep:
-      - type: from_entity
-        entity: sleep
-        intent: inform
+    - type: from_entity
+      entity: sleep
+      intent: inform
     stress:
     - type: from_entity
       entity: stress
