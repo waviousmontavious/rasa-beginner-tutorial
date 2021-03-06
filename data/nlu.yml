@@ -146,3 +146,8 @@ nlu:
     - Health form
     - Health form please
     - health form
+- intent: request_save_data
+  examples: |
+    - Can you save data?
+    - Can you please save my data?
+    - Save Data

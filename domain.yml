@@ -16,6 +16,7 @@ intents:
 - ask_lower_stress
 - ask_exercise
 - out_of_scope
+- request_save_data
 entities:
 - exercise
 - sleep
@@ -69,6 +70,8 @@ responses:
   - text: Is your stress level low medium or high?
   utter_ask_goal:
   - text: What do you want to accomplish today?
+  utter_ask_confirm_save_data:
+  - text: Are you sure you want to save your data?
   utter_slots_values:
   - text: |
       Here's your daily wellness log:
@@ -86,6 +89,7 @@ actions:
 - utter_greet
 - utter_slots_values
 - validate_health_form
+- save_data
 forms:
   health_form:
     exercise:

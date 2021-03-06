@@ -34,3 +34,18 @@ class HealthForm(FormValidationAction):
             return {"confirm_exercise": True}
         else:
             return {"confirm_exercise": False, "exercise": "None"}
+
+
+class SaveDataAction(Action):
+
+    def name(self) -> Text:
+        return "save_data"
+
+    async def run(
+        self,
+        dispatcher,
+        tracker: Tracker,
+        domain: "DomainDict",
+    ) -> List[Dict[Text, Any]]:
+        print('running Save Data Action')
+        return []
